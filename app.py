@@ -4,8 +4,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 import os
-from dotenv import load_dotenv
-load_dotenv()
+
 
 db = SQLAlchemy()
 
@@ -19,7 +18,9 @@ def create_app():
 
     db.init_app(app)
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-
+    from dotenv import load_dotenv
+    load_dotenv()
+    
     login_manager = LoginManager()
     login_manager.init_app(app)
 

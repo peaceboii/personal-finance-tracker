@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container" >
+    <!-- ✅ Navigation Bar -->
+    <nav class="navbar">
+        {% if current_user.is_authenticated %}
+        <h1 class="nav-title" style="color: antiquewhite;">💰Personal Finance Tracker</h1>
+        {% endif %}
+        <!-- Hamburger toggle button -->
+        <button class="hamburger" id="hamburger">
+            ☰
+        </button>
+        
+
+        <!-- Navigation links -->
+        <nav class="nav-links" id="nav-links" style=" gap:1rem">
+            {% if current_user.is_authenticated %}
+                <button class="primary"   onclick="location.href='/set_budget'">Set Budget</button>
+                <button class="primary" onclick="location.href='/add_transaction'">Add Transaction</button>
+                <button class="primary" onclick="location.href='/dashboard'">Dashboard</button>
+                <button class="log-out" onclick="location.href='/logout'">Logout</button>
+                
+            {% else %}
+                <button class="login" onclick="location.href='/login'">Login</button>
+                <button class="signup" onclick="location.href='/signup'">Signup</button>
+
+            {% endif %}
+        </nav>
+    </nav>
+
+    <!-- ✅ Main Section -->
+    <section class="main-section">
+        {% if current_user.is_authenticated %}
+            <h2 class="section-title">Welcome back, {{ current_user.username }}!</h2>
+        {% else %}
+            <h2 class="section-title">Welcome to Personal Finance Tracker</h2>
+        {% endif %}
+    </section>
+</div>
+
+{% endblock  %}
+

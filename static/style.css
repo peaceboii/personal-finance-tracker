@@ -1,0 +1,196 @@
+/* General reset and fonts */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0890bd;
+    color: #333;
+}
+
+/* Navbar */
+nav {
+    background-color: #00cc99;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+/* Headings */
+h1, h2 {
+    text-align: center;
+    color: #00cc99;
+}
+
+/* Card style */
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 1rem 0;
+}
+
+/* Buttons */
+button, .btn {
+    background-color: #00cc99;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #009e75;
+}
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* Chart container */
+#budgetChart {
+    width: 50% !important;
+    max-width: 600px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #00cc99;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Alerts */
+.alert {
+    padding: 1rem;
+    background-color: #ffcccc;
+    color: #990000;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #eaeaea;
+    color: #666;
+    margin-top: 2rem;
+}
+/* Navbar Styling */
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    padding: 10px 20px;
+    color: white;
+}
+
+.nav-title {
+    font-size: 1.5rem;
+}
+
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #444;
+    border-radius: 5px;
+}
+
+.logout {
+    background-color: #ff4d4d;
+    border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .card, form, table {
+        padding: 1rem;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .hamburger {
+    display: absolute;
+    justify-content: right;
+    cursor: pointer;
+    font-size: 24px;
+    color: black;
+}
+    .nav-links.show-nav{
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links {
+    display: block;
+    text-align: center;
+
+  }
+}

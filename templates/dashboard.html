@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Welcome, {{ current_user.username }}</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <button class="primary"   onclick="location.href='/'">Home</button>
+    <div class="summary">
+        <p><strong>Budget:</strong> ₹{{ budget }}</p>
+        <p><strong>Total Income:</strong> ₹{{ total_income }}</p>
+        <p><strong>Total Spent:</strong> ₹{{ total_spent }}</p>
+        <p><strong>Balance:</strong> ₹{{ balance }}</p>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="budgetChart"
+                data-labels='{{ chart_data["labels"] | tojson }}'
+                data-values='{{ chart_data["values"] | tojson }}'
+                width="300" height="300"></canvas>
+    </div>
+
+    <div class="transactions">
+        <h2>Transaction History</h2>
+        <button class="primary" onclick="location.href='/add_transaction'">Add</button>
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Amount (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in transactions %}
+                    <tr>
+                        
+                        <td>{{ t.description }}</td>
+                        <td>{{ t.type }}</td>
+                        <td>{{ t.amount }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- JS Chart support -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

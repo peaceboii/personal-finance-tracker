@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Transaction</h2>
+<form action="{{url_for('add_transaction')}}" method="POST">
+   
+    <input type="number" name="amount" id="amount" placeholder="amount">
+    <select name="type" id="type">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+    </select><br>
+    <input type="text" name="description" id="description" placeholder="description"><br>
+    <input type="submit" value="Add">
+    <input type="hidden" name="timezone_offset" id="timezone_offset">
+
+</form>
+{% endblock %}**

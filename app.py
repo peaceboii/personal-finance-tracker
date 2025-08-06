@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate,upgrade
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 import os
@@ -35,6 +35,9 @@ def create_app():
     from  route import register_routes
     register_routes(app, db,bcrypt)
     Migrate(app, db)
+
+    def run_migrations():
+        upgrade()
 
     return app
 

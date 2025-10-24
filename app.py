@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate,upgrade
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 import os
@@ -9,32 +9,40 @@ import os
 
 load_dotenv()
 
+#
 db = SQLAlchemy()
-migrate = Migrate()
-bcrypt = Bcrypt()
-login_manager = LoginManager()
-
+#
 def create_app():
     app = Flask(__name__, template_folder='templates')
+    app.jinja_env.auto_reload = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'supersecretkey123')
-
-    # Initialize extensions
     db.init_app(app)
-    migrate.init_app(app, db)
-    bcrypt.init_app(app)
+
+
+    app.config["SECRET_KEY"] = "supersecretkey123"  # change this in production
+   
+    login_manager = LoginManager()
     login_manager.init_app(app)
-
-    # Import models AFTER db init
+#
     from models import User
-    from route import register_routes
-    register_routes(app, db, bcrypt)
-
+#
     @login_manager.user_loader
     def load_user(uid):
-        return User.query.get(int(uid))
+        return User.query.get(uid)
+    
+    bcrypt = Bcrypt(app)
+
+    from  route import register_routes
+    register_routes(app, db,bcrypt)
+    Migrate(app, db)
+
+    def run_migrations():
+        upgrade()
 
     return app
-#
+
+
+app = create_app()

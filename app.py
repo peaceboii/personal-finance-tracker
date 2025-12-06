@@ -8,6 +8,7 @@ import os
 
 load_dotenv()
 
+DATABASE_URL = os.getenv("DATABASE_URL")
 db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
@@ -16,9 +17,12 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__, template_folder='templates')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'supersecretkey123')
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "connect_args": {"sslmode": "require"}
+    }
 
     # Initialize extensions
     db.init_app(app)
